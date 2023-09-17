@@ -92,3 +92,124 @@ def delete_cliente(id):
         conn.close()
 
 
+
+
+
+
+
+
+
+
+# Rota de cria endereco_cliente 
+@cliente_bp.route('/cliente/cria_endereco_cliente', methods=['POST'])
+def criar_endereco_cliente():
+    
+    db_objt = db_mysql_class()
+    conn = db_objt.get_db_connection()
+    try:
+        cursor = conn.cursor()
+
+        rua = request.json['rua']
+        numero = request.json['numero']
+        bairro = request.json['bairro']
+        cep = request.json['cep']
+        estado = request.json['estado']
+        cidade = request.json['cidade']
+        complemento = request.json['complemento']
+        id_cliente = request.json['id_cliente']
+
+        query = "INSERT INTO endereco_cliente (rua, numero, bairro, cep, estado, cidade, complemento, id_cliente) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+        values = (rua, numero, bairro, cep, estado, cidade, complemento, id_cliente)
+
+        cursor.execute(query, values)
+        conn.commit()
+
+        cursor.close()
+        return jsonify({"message": "Endereço para cliente criado com sucesso"}), 201
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+
+
+
+
+
+# Rota para consultar todos os endereco_cliente pelo ID do cliente
+@cliente_bp.route('/cliente/endereco_cliente/<int:id>', methods=['GET'])
+def obter_endereco_cliente(id):
+
+    db_objt = db_mysql_class()
+    conn = db_objt.get_db_connection()
+    try:
+        cursor = conn.cursor(dictionary=True)
+        query = "SELECT * FROM endereco_cliente WHERE id_cliente = %s"
+        cursor.execute(query, (id,))
+        endereco = cursor.fetchall()
+        cursor.close()
+
+        if endereco:
+            return jsonify(endereco), 200
+        else:
+            return jsonify({"message": "Endereço para cliente não encontrado"}), 404
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+
+
+
+
+
+# Rota para atualizar um cliente pelo ID
+@cliente_bp.route('/cliente/endereco_cliente/<int:id>', methods=['PUT'])
+def atualizar_endereco_cliente(id):
+
+    db_objt = db_mysql_class()
+    conn = db_objt.get_db_connection()
+    try:
+        cursor = conn.cursor()
+
+        rua = request.json['rua']
+        numero = request.json['numero']
+        bairro = request.json['bairro']
+        cep = request.json['cep']
+        estado = request.json['estado']
+        cidade = request.json['cidade']
+        complemento = request.json['complemento']
+        id_cliente = request.json['id_cliente']
+
+        query = "UPDATE endereco_cliente SET rua=%s, numero=%s, bairro=%s, cep=%s, estado=%s, cidade=%s, complemento=%s, id_cliente=%s WHERE id_endereco_cliente=%s"
+        values = (rua, numero, bairro, cep, estado, cidade, complemento, id_cliente, id)
+
+        cursor.execute(query, values)
+        conn.commit()
+
+        cursor.close()
+        return jsonify({"message": "Endereço para cliente atualizado com sucesso"}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+
+
+
+
+
+
+# Rota para excluir um cliente pelo ID
+@cliente_bp.route('/cliente/endereco_cliente/<int:id>', methods=['DELETE'])
+def excluir_endereco_cliente(id):
+
+    db_objt = db_mysql_class()
+    conn = db_objt.get_db_connection()
+    try:
+        cursor = conn.cursor()
+        query = "DELETE FROM endereco_cliente WHERE id_endereco_cliente = %s"
+        cursor.execute(query, (id,))
+        conn.commit()
+        cursor.close()
+        return jsonify({"message": "Endereço para cliente excluído com sucesso"}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
