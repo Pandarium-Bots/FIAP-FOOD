@@ -14,6 +14,10 @@ app = Flask(__name__)
 app.register_blueprint(cliente_bp)
 app.register_blueprint(restaurante_bp)
 app.register_blueprint(entregador_bp)
+# app.register_blueprint(produto_bp)
+# app.register_blueprint(pedido_bp)
+# app.register_blueprint(avaliacao_bp)
+
 
 #Definir uma rota para a página inicial
 @app.route('/')
