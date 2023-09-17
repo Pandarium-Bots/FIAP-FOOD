@@ -1,0 +1,1 @@
+from .entregador_rotas import entregador_bp
