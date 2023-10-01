@@ -62,6 +62,7 @@ def create_pedido():
 
             query = "INSERT INTO pedido (id_cliente, id_restaurante, id_entregador, id_endereco_cliente, forma_pagamento, produtos, status_pedido, valor, data_hora_pedido) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
             values = (data['id_cliente'], id_restaurante, data['id_entregador'], data['id_endereco_cliente'], data['forma_pagamento'], produtos_texto_string, data['status_pedido'], valor_total, data['data_hora_pedido'])
+            # arrumar ali no DATA[entregador] para pegar sem o data 
             cursor.execute(query, values)
             conn.commit()
             return jsonify({"message": "pedido criado com sucesso"}), 201
