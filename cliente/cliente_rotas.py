@@ -136,7 +136,7 @@ def criar_endereco_cliente():
 
 
 # Rota para consultar todos os endereco_cliente pelo ID do cliente
-@cliente_bp.route('/cliente/endereco_cliente/<int:id>', methods=['GET'])
+@cliente_bp.route('/cliente/consulta_endereco_cliente/<int:id>', methods=['GET'])
 def obter_endereco_cliente(id):
 
     db_objt = db_mysql_class()
@@ -162,7 +162,7 @@ def obter_endereco_cliente(id):
 
 
 # Rota para atualizar um cliente pelo ID
-@cliente_bp.route('/cliente/endereco_cliente/<int:id>', methods=['PUT'])
+@cliente_bp.route('/cliente/atualiza_endereco_cliente/<int:id>', methods=['PUT'])
 def atualizar_endereco_cliente(id):
 
     db_objt = db_mysql_class()
@@ -198,7 +198,7 @@ def atualizar_endereco_cliente(id):
 
 
 # Rota para excluir um cliente pelo ID
-@cliente_bp.route('/cliente/endereco_cliente/<int:id>', methods=['DELETE'])
+@cliente_bp.route('/cliente/deleta_endereco_cliente/<int:id>', methods=['DELETE'])
 def excluir_endereco_cliente(id):
 
     db_objt = db_mysql_class()

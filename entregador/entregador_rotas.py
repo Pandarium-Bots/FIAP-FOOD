@@ -94,3 +94,164 @@ def delete_entregador(id):
     finally:
         cursor.close()
         conn.close()
+
+
+
+
+
+
+
+
+
+
+# Rota para recuperar todos os produtos
+@entregador_bp.route('/entregador/consulta_all/', methods=['GET'])
+def get_entregador_all():
+    db_objt = db_mysql_class()
+    conn = db_objt.get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    try:
+        query = "SELECT * FROM entregador"
+        cursor.execute(query)
+        entregador = cursor.fetchall()
+        if entregador:
+            return jsonify(entregador), 200
+        else:
+            return jsonify({"message": "entregador não encontrado"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+    finally:
+        cursor.close()
+        conn.close()
+
+
+
+
+
+
+
+
+# Rota para recuperar todos os entregador
+@entregador_bp.route('/entregador/consulta_entregador_disponivel/', methods=['GET'])
+def get_entregador_disponivel():
+    db_objt = db_mysql_class()
+    conn = db_objt.get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    try:
+        query = "SELECT * FROM entregador WHERE disponivel = 1"
+        cursor.execute(query)
+        entregador = cursor.fetchall()
+        if entregador:
+            return jsonify(entregador), 200
+        else:
+            return jsonify({"message": "entregador não encontrado"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+    finally:
+        cursor.close()
+        conn.close()
+
+
+
+
+# Rota para atualizar um entregador pelo ID para disponivel
+@entregador_bp.route('/entregador/atualiza_entregador_disponivel/<int:id>', methods=['PUT'])
+def update_entregador_disponivel(id):
+    db_objt = db_mysql_class()
+    conn = db_objt.get_db_connection()
+    cursor = conn.cursor()
+    try:
+        query = "UPDATE entregador SET disponivel = %s WHERE id_entregador = %s"
+        values = (True, id)
+        cursor.execute(query, values)
+        conn.commit()
+        return jsonify({"message": "Entregador atualizado com sucesso"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+    finally:
+        cursor.close()
+        conn.close()
+
+
+
+
+
+
+# Rota para atualizar um entregador pelo ID para indisponivel
+@entregador_bp.route('/entregador/atualiza_entregador_indisponivel/<int:id>', methods=['PUT'])
+def update_entregador_indisponivel(id):
+    db_objt = db_mysql_class()
+    conn = db_objt.get_db_connection()
+    cursor = conn.cursor()
+    try:
+        query = "UPDATE entregador SET disponivel = %s WHERE id_entregador = %s"
+        values = (False, id)
+        cursor.execute(query, values)
+        conn.commit()
+        return jsonify({"message": "Entregador atualizado com sucesso"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+    finally:
+        cursor.close()
+        conn.close()
+
+
+
+
+
+
+
+
+
+# Rota para recuperar o entregador e torna-lo indisponivel
+@entregador_bp.route('/entregador/seleciona_entregador/', methods=['GET'])
+def seleciona_entregador():
+    db_objt = db_mysql_class()
+    conn = db_objt.get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    try:
+        query = "SELECT * FROM entregador WHERE disponivel = 1 ORDER BY RAND() LIMIT 1"
+        cursor.execute(query)
+        entregador = cursor.fetchone()
+        if entregador:
+            entregador_json = dict(entregador)
+            print(entregador_json,file=sys.stderr)
+            update_entregador_indisponivel(entregador_json['id_entregador'])
+            return entregador_json, 200
+        else:
+            return jsonify({"message": "entregador não encontrado"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+    finally:
+        cursor.close()
+        conn.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            # query = "UPDATE entregador SET disponivel = %s WHERE id_entregador = %s"
+            # values = (False, entregador_json['id_entregador'])
+            # cursor.execute(query, values)
+            # conn.commit()

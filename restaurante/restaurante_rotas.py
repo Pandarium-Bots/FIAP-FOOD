@@ -88,3 +88,59 @@ def delete_restaurante(id):
     finally:
         cursor.close()
         conn.close()
+
+
+
+
+
+
+
+
+
+# Rota para recuperar todos os restaurantes
+@restaurante_bp.route('/restaurante/consulta_all/', methods=['GET'])
+def get_restaurantes_all():
+    db_objt = db_mysql_class()
+    conn = db_objt.get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    try:
+        query = "SELECT * FROM restaurante"
+        cursor.execute(query)
+        restaurante = cursor.fetchall()
+        if restaurante:
+            return jsonify(restaurante), 200
+        else:
+            return jsonify({"message": "restaurante não encontrado"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+    finally:
+        cursor.close()
+        conn.close()
+
+
+
+
+
+
+
+# Rota para recuperar todos os restaurantes
+@restaurante_bp.route('/restaurante/consulta_categoria/<string:categoria>', methods=['GET'])
+def get_restaurantes_categoria(categoria):
+    db_objt = db_mysql_class()
+    conn = db_objt.get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    try:
+        query = "SELECT * FROM restaurante where categoria = %s"
+        cursor.execute(query, (categoria,))
+        restaurante = cursor.fetchall()
+        if restaurante:
+            return jsonify(restaurante), 200
+        else:
+            return jsonify({"message": "restaurante não encontrado"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+    finally:
+        cursor.close()
+        conn.close()
+
+

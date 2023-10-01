@@ -6,6 +6,8 @@ from cliente import cliente_bp
 from restaurante import restaurante_bp
 from entregador import entregador_bp
 from avaliacao import avaliacao_bp
+from pedido import pedido_bp
+from produto import produto_bp
 
 
 #Criar uma instância do Flask
@@ -15,8 +17,8 @@ app = Flask(__name__)
 app.register_blueprint(cliente_bp)
 app.register_blueprint(restaurante_bp)
 app.register_blueprint(entregador_bp)
-# app.register_blueprint(produto_bp)
-# app.register_blueprint(pedido_bp)
+app.register_blueprint(produto_bp)
+app.register_blueprint(pedido_bp)
 app.register_blueprint(avaliacao_bp)
 
 
@@ -28,7 +30,7 @@ def hello_world():
 
 
 #Iniciar o aplicativo se este arquivo for executado diretamente
-if __name__ == 'main':
+if __name__ == '__main__':
     app.run()
 
 
