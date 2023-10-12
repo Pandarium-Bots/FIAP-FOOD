@@ -213,3 +213,33 @@ def excluir_endereco_cliente(id):
 
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+
+
+
+
+
+
+
+
+
+# Rota para consultar um cliente pelo CPF
+@cliente_bp.route('/cliente/consulta_cliente_cpf/<string:cpf>', methods=['GET'])
+def get_cliente_cpf(cpf):
+    db_objt = db_mysql_class()
+    conn = db_objt.get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    try:
+        query = "SELECT * FROM cliente WHERE cpf = %s"
+        cursor.execute(query, (cpf,))
+        cliente = cursor.fetchone()
+        if cliente:
+            return jsonify(cliente), 200
+        else:
+            return jsonify({"message": "Cliente não encontrado"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+    finally:
+        cursor.close()
+        conn.close()
+
+

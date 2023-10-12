@@ -121,6 +121,32 @@ def excluir_produto(id):
 
 
 
+@produto_bp.route('/produto/consulta_produto_categoria/<string:categoria>/', methods=['GET'])
+def get_produto_categoria(categoria):
+    db_objt = db_mysql_class()
+    conn = db_objt.get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    try:
+        query = "SELECT * FROM produto WHERE categoria = %s"
+        cursor.execute(query, (categoria,))
+        produto = cursor.fetchone()
+        if produto:
+            return jsonify(produto), 200
+        else:
+            return jsonify({"message": "produto não encontrado"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+    finally:
+        cursor.close()
+        conn.close()
+
+
+
+
+
+
+
+
 
 
 
