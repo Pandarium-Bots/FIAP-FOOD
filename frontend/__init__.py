@@ -1,0 +1,1 @@
+from .frontend import front_bp
