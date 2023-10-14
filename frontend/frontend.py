@@ -8,11 +8,9 @@ front_bp = Blueprint('frontend', __name__,template_folder='templates')
 
 
 
-@front_bp.route('/')
+@front_bp.route('/index')
+@front_bp.route('/index/')
 def index():
     return render_template('index.html')
 
 
-@front_bp.route('/static/<path:filename>')
-def custom_static(filename):
-    return send_from_directory(front_bp.root_path + '/static/', filename)

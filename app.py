@@ -22,7 +22,7 @@ app.register_blueprint(entregador_bp)
 app.register_blueprint(produto_bp)
 app.register_blueprint(pedido_bp)
 app.register_blueprint(avaliacao_bp)
-app.register_blueprint(front_bp)
+app.register_blueprint(front_bp,url_prefix='')
 
 
 @app.route('/static/<path:filename>')
