@@ -14,9 +14,7 @@ from frontend import front_bp
 
 #Criar uma instância do Flask
 app = Flask(__name__)
-
-
-
+app.debug = True
 
 app.register_blueprint(cliente_bp)
 app.register_blueprint(restaurante_bp)
@@ -25,6 +23,11 @@ app.register_blueprint(produto_bp)
 app.register_blueprint(pedido_bp)
 app.register_blueprint(avaliacao_bp)
 app.register_blueprint(front_bp)
+
+
+@app.route('/static/<path:filename>')
+def custom_static(filename):
+    return send_from_directory(app.root_path + '/static/', filename)
 
 
 #Definir uma rota para a página inicial
