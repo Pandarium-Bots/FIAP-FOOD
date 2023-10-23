@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+    
+
+<div class="card" style="margin: 10px;">
+    <div class="card-body">
+        <!-- <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Categoria</th>
+                    <th>Descrição</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for restaurante in rest_list %}
+                <tr>
+                    <td>{{ restaurante['nome'] }}</td>
+                    <td>{{ restaurante['categoria'] }}</td>
+                    <td>{{ restaurante['descricao'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table> -->
+
+    <div class="row align-items-center" style="width: 100% ;display: flex; justify-content: center;">
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Selecione a categoria 
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/restaurantes">Todos</a></li>
+              <li><a class="dropdown-item" href="/restaurantes/Cafeteria">Cafeteria</a></li>
+              <li><a class="dropdown-item" href="/restaurantes/Frutos do mar">Frutos do mar</a></li>
+              <li><a class="dropdown-item" href="/restaurantes/Karaoke">Karaoke</a></li>
+              <li><a class="dropdown-item" href="/restaurantes/Churrascaria">Churrascaria</a></li>
+              <li><a class="dropdown-item" href="/restaurantes/Bar e Taverna">Bar e Taverna</a></li>
+              <li><a class="dropdown-item" href="/restaurantes/Ace Grill & BBQ">Ace Grill & BBQ</a></li>
+              <li><a class="dropdown-item" href="/restaurantes/Bar e Música ao Vivo">Bar e Música ao Vivo</a></li>
+              <li><a class="dropdown-item" href="/restaurantes/Cafeteria e Livraria">Cafeteria e Livraria</a></li>
+              <li><a class="dropdown-item" href="/restaurantes/Doceria">Doceria</a></li>
+              <li><a class="dropdown-item" href="/restaurantes/Justcica">Justiça</a></li>
+
+            </ul>
+          </div>
+    </div>
+
+    <div class="row align-items-center">
+        
+        {% for restaurante in rest_list %}
+        
+      <div class="col">
+        <div class="card" style="width: 20rem; margin: 10px; height: 10rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{ restaurante['nome'] }}</h5>
+              <h6 class="card-subtitle mb-2 text-body-secondary">{{ restaurante['descricao'] }}</h6>
+            </div>
+        </div>
+    </div>
+        {% endfor %}
+    </div>
+    
+</div>
+</div>
+
+
+{% endblock %}

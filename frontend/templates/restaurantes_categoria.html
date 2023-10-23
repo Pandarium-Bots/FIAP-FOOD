@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+    
+
+<div class="card" style="margin: 10px;">
+    <div class="card-body">
+        <!-- <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Categoria</th>
+                    <th>Descrição</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for restaurante in rest_list %}
+                <tr>
+                    <td>{{ restaurante['nome'] }}</td>
+                    <td>{{ restaurante['categoria'] }}</td>
+                    <td>{{ restaurante['descricao'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table> -->
+
+    
+    <div class="row align-items-center">
+        {% for restaurante in rest_list %}
+        
+      <div class="col">
+        <div class="card" style="width: 20rem; margin: 10px; height: 10rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{ restaurante['nome'] }}</h5>
+              <h6 class="card-subtitle mb-2 text-body-secondary">{{ restaurante['descricao'] }}</h6>
+            </div>
+        </div>
+    </div>
+        {% endfor %}
+    </div>
+    
+</div>
+</div>
+
+
+{% endblock %}

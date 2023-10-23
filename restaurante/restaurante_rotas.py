@@ -6,6 +6,32 @@ from db import db_mysql_class
 restaurante_bp = Blueprint('restaurante', __name__)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #Rota para criar um novo restaurante
 @restaurante_bp.route('/restaurante/cria_restaurante', methods=['POST'])
 def create_restaurante():
@@ -112,10 +138,11 @@ def get_restaurantes_all():
         else:
             return jsonify({"message": "restaurante não encontrado"}), 404
     except Exception as e:
-        return jsonify({"error": str(e)}), 400
+        return jsonify({"error": str(e)}), 500
     finally:
         cursor.close()
         conn.close()
+    
 
 
 
