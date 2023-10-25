@@ -1,0 +1,22 @@
+[
+    {"identificador": "hinata", "ambiente": "testops", "account_id": 4526},
+    {"identificador": "sakura", "ambiente": "tradops", "account_id": 6231},
+    {"identificador": "itachi", "ambiente": "devops", "account_id": 9191},
+    {"identificador": "naruto", "ambiente": "devops", "account_id": 1552},
+    {"identificador": "sasuke", "ambiente": "devops", "account_id": 15552},
+    {"identificador": "sai", "ambiente": "testops", "account_id": 8527},
+    {"identificador": "kakashi", "ambiente": "tradops", "account_id": 7523},
+    {"identificador": "tsunade", "ambiente": "devops", "account_id": 6335},
+    {"identificador": "jiraiya", "ambiente": "devops", "account_id": 7431},
+    {"identificador": "orochimaru", "ambiente": "testops", "account_id": 9853},
+    {"identificador": "neji", "ambiente": "tradops", "account_id": 6124},
+    {"identificador": "rocklee", "ambiente": "devops", "account_id": 9512},
+    {"identificador": "shikamaru", "ambiente": "devops", "account_id": 8524},
+    {"identificador": "choji", "ambiente": "testops", "account_id": 7421},
+    {"identificador": "ino", "ambiente": "tradops", "account_id": 6423},
+    {"identificador": "shino", "ambiente": "devops", "account_id": 7512},
+    {"identificador": "kiba", "ambiente": "devops", "account_id": 9631},
+    {"identificador": "temari", "ambiente": "testops", "account_id": 8526},
+    {"identificador": "gaara", "ambiente": "tradops", "account_id": 9518},
+    {"identificador": "kankuro", "ambiente": "devops", "account_id": 7525}
+]

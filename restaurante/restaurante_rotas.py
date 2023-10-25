@@ -7,31 +7,6 @@ restaurante_bp = Blueprint('restaurante', __name__)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #Rota para criar um novo restaurante
 @restaurante_bp.route('/restaurante/cria_restaurante', methods=['POST'])
 def create_restaurante():

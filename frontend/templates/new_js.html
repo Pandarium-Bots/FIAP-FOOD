@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+
+
+
+<div class="card" style="margin: 10px;">
+
+    <div class="row align-items-center" style="width: 100% ;display: flex; justify-content: center;">
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Selecione a categoria
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/restaurantes">Todos</a></li>
+                <li><a class="dropdown-item" href="/restaurantes/Cafeteria">Cafeteria</a></li>
+                <li><a class="dropdown-item" href="/restaurantes/Frutos do mar">Frutos do mar</a></li>
+                <li><a class="dropdown-item" href="/restaurantes/Karaoke">Karaoke</a></li>
+                <li><a class="dropdown-item" href="/restaurantes/Churrascaria">Churrascaria</a></li>
+                <li><a class="dropdown-item" href="/restaurantes/Bar e Taverna">Bar e Taverna</a></li>
+                <li><a class="dropdown-item" href="/restaurantes/Ace Grill & BBQ">Ace Grill & BBQ</a></li>
+                <li><a class="dropdown-item" href="/restaurantes/Bar e Música ao Vivo">Bar e Música ao Vivo</a></li>
+                <li><a class="dropdown-item" href="/restaurantes/Cafeteria e Livraria">Cafeteria e Livraria</a></li>
+                <li><a class="dropdown-item" href="/restaurantes/Doceria">Doceria</a></li>
+                <li><a class="dropdown-item" href="/restaurantes/Justcica">Justiça</a></li>
+
+            </ul>
+        </div>
+    </div>
+
+
+
+    <div class="card-body">
+
+
+        <div class="row align-items-center">
+
+            <div class="col-12">
+                <div class="card" style=" margin: 10px;">
+                    <div class="card-body">
+                        <div id="chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center">
+
+            <div class="col-6">
+                <div class="card" style=" margin: 10px; ">
+                    <div class="card-body">
+                        <div id="chart_2"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card" style=" margin: 10px; ">
+                    <div class="card-body">
+                        <div id="chart_3"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card" style=" margin: 10px; ">
+                    <div class="card-body">
+                        <div id="chart_semi_circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="/static/js/chart_teste.js"></script>
+<script src="/static/js/teste_js_apex_chart.js"></script>
+
+{% endblock %}

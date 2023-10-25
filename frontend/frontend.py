@@ -17,6 +17,29 @@ def index():
     return render_template('index.html',title = 'Inicio')
 
 
+
+
+
+@front_bp.route('/new_js')
+@front_bp.route('/new_js/')
+def new_js():
+    return render_template('new_js.html',title = 'new_js')
+
+
+
+
+@front_bp.route('/new_js_percent')
+@front_bp.route('/new_js_percent/')
+def new_js_percet():
+    return {'percent':80}
+
+
+
+
+
+
+
+
 @front_bp.route('/restaurantes')
 @front_bp.route('/restaurantes/')
 def restaurantes_front():
