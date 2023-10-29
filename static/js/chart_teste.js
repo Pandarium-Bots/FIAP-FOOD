@@ -42,12 +42,20 @@ $(document).ready( async function () {
     var options = {
         series: [
             {
-                name: "High - 2013",
+                name: "Mysql",
                 data: [28, 29, 33, 36, 32, 32, 33]
             },
             {
-                name: "Low - 2013",
+                name: "PostgreSql",
                 data: [12, 11, 14, 18, 17, 13, 13]
+            },
+            {
+                name: "Aurora",
+                data: [33, 42, 14, 51, 33, 71, 13]
+            },
+            {
+                name: "Neptune",
+                data: [17, 34, 22, 18, 28, 13, 2]
             }
         ],
         chart: {
@@ -65,7 +73,7 @@ $(document).ready( async function () {
                 show: false
             }
         },
-        colors: ['#383838', '#66DA26'],
+        colors: ['#383838', '#66DA26','#040fb0','#a83523'],
         dataLabels: {
             enabled: true,
         },
@@ -73,7 +81,7 @@ $(document).ready( async function () {
             curve: 'smooth'
         },
         title: {
-            text: 'Average High & Low Temperature',
+            text: 'Quantidade de instancias ao longo do tempo',
             align: 'left',
             style: {
                 fontSize: '14px',
@@ -90,7 +98,7 @@ $(document).ready( async function () {
             },
         },
         markers: {
-            size: 1
+            size: 3
         },
         xaxis: {
             categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
@@ -105,13 +113,6 @@ $(document).ready( async function () {
                     // color: '#ffffff'
                 },
             }
-        },
-        yaxis: {
-            title: {
-                text: 'Temperature'
-            },
-            min: 5,
-            max: 40
         },
         legend: {
             position: 'top',

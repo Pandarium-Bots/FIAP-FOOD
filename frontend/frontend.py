@@ -28,6 +28,24 @@ def new_js():
 
 
 
+
+@front_bp.route('/new_js_qtd_instance')
+@front_bp.route('/new_js_instance/')
+def qntd_each_instance():
+    
+    with open("list_json.json", "r") as arquivo:
+        dados = json.load(arquivo)
+    
+
+    return {'percent':80}
+
+
+
+
+
+
+
+
 @front_bp.route('/new_js_percent')
 @front_bp.route('/new_js_percent/')
 def new_js_percet():
