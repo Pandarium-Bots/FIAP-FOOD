@@ -9,10 +9,12 @@ from avaliacao import avaliacao_bp
 from pedido import pedido_bp
 from produto import produto_bp
 from fatura import fatura_bp
+from flask_restx import Api, Resource
 
 
 #Criar uma instância do Flask
 app = Flask(__name__)
+api = Api(app, version='1.0', title='Minha API', description='Uma API de exemplo', doc='/swagger/')
 
 
 app.register_blueprint(cliente_bp)
