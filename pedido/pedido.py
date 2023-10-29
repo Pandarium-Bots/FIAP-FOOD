@@ -3,7 +3,11 @@ import sys
 from db import db_mysql_class
 from produto import get_produto as gp
 from produto import get_produto_lote 
+from entregador import seleciona_entregador
+from entregador import update_entregador_disponivel
 from itertools import groupby
+from datetime import datetime
+import traceback
 
 pedido_bp = Blueprint('pedido', __name__)
 
@@ -31,18 +35,30 @@ def create_pedido():
     #forma de pagamento
     #
     try:
+        print("Passou : Inicio do try",file=sys.stderr)
         data = request.json
+        print("Passou : data",file=sys.stderr)
+        print(data['produtos'],file=sys.stderr)
+        print(type(data['produtos']),file=sys.stderr)
 
-        produtos_list = list(get_produto_lote( [produto['id_produto'] for produto in data['produtos']] ))
+
+        produtos_list = list(get_produto_lote( [produto['id_produto'] for produto in data['produtos']]))
+        print("Passou : get_produto_lote",file=sys.stderr)
+        print(produtos_list,file=sys.stderr)
+
+
 
         # for produto in data['produtos']:
         #     produto_info = gp(produto['id_produto'])
         #     produtos_list.append(produto_info)
 
         disponivel_check = next((item for item in produtos_list if item['disponivel'] == 0), None)
+        print("Passou : disponivel_check",file=sys.stderr)
+
 
 
         id_restaurante, id_check = check([x['id_restaurante'] for x in  produtos_list])
+        print("Passou : id_restaurante",file=sys.stderr)
 
         if id_check and disponivel_check == None:
             valor_lista = [float(x['valor']) for x in produtos_list]
@@ -58,19 +74,46 @@ def create_pedido():
                 produtos_texto_lista.append(produto_selecionado)
 
             produtos_texto_string = str(produtos_texto_lista)
+            print(produtos_texto_string,file=sys.stderr)
 
+
+            current_datetime = datetime.now()
 
             query = "INSERT INTO pedido (id_cliente, id_restaurante, id_entregador, id_endereco_cliente, forma_pagamento, produtos, status_pedido, valor, data_hora_pedido) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-            values = (data['id_cliente'], id_restaurante, data['id_entregador'], data['id_endereco_cliente'], data['forma_pagamento'], produtos_texto_string, data['status_pedido'], valor_total, data['data_hora_pedido'])
+            values = (data['id_cliente'], id_restaurante, None, data['id_endereco_cliente'], data['forma_pagamento'], produtos_texto_string, 1, valor_total, current_datetime)
             # arrumar ali no DATA[entregador] para pegar sem o data 
             cursor.execute(query, values)
             conn.commit()
+
+
+            query_pedido = "SELECT * FROM pedido WHERE id_pedido = (SELECT MAX(id_pedido) FROM pedido WHERE id_cliente = %s AND data_hora_pedido >= NOW() - INTERVAL 3 DAY)"
+            values_pedido =(data['id_cliente'],)
+            cursor.execute(query_pedido, values_pedido)
+            pedido = cursor.fetchone()
+            print("Passou: Pedido, query do pedido",file=sys.stderr)
+            print(pedido,"\n",file=sys.stderr)
+
+
+
+            query_fatura = "INSERT INTO fatura (id_pedido, id_cliente, valor, status, data_fatura) VALUES (%s, %s, %s, %s, %s)"
+            values_fatura = (pedido[0], data.get('id_cliente'), valor_total, 1,current_datetime)
+            print(values_fatura,file=sys.stderr)
+            # arrumar ali no DATA[entregador] para pegar sem o data 
+            cursor.execute(query_fatura, values_fatura)
+            conn.commit()
+
+
             return jsonify({"message": "pedido criado com sucesso"}), 201
         else:
            return jsonify({"message": "Pedido invalido, produtos de mais de um restaurante no pedido"}), 400
         
+    
     except Exception as e:
-        return jsonify({"error": str(e)}), 400
+        error_info = traceback.format_exc()
+        print("Ocorreu um erro!")
+        print("Mensagem:", str(e))
+        print("Informações completas do erro:\n", error_info)
+        return jsonify({"error": str(e),  "Informações completas do erro:": error_info}), 400
     finally:
         cursor.close()
         conn.close()
@@ -142,3 +185,124 @@ def delete_pedido(id):
     finally:
         cursor.close()
         conn.close()
+
+
+
+# Rota para atualizar um pedido pelo ID
+@pedido_bp.route('/pedido/atualiza_pedido_aguardando/<int:id>', methods=['PUT'])
+def update_pedido_aguardando(id):
+    db_objt = db_mysql_class()
+    conn = db_objt.get_db_connection()
+    cursor = conn.cursor()
+    try:
+        query = "UPDATE pedido SET status_pedido = 1 WHERE id_pedido = %s"
+        values = (id,)
+        cursor.execute(query, values)
+        conn.commit()
+        return jsonify({"message": "Pedido atualizado com sucesso"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+    finally:
+        cursor.close()
+        conn.close()
+
+
+
+
+
+
+
+# Rota para atualizar um pedido pelo ID para preparacao
+@pedido_bp.route('/pedido/atualiza_pedido_preparacao/<int:id>', methods=['PUT'])
+def update_pedido_preparacao(id):
+    db_objt = db_mysql_class()
+    conn = db_objt.get_db_connection()
+    cursor = conn.cursor()
+    try:
+
+        query_fatura = "SELECT * FROM fatura WHERE id_pedido = %s"
+        values_fatura =(id,)
+        cursor.execute(query_fatura, values_fatura)
+        fatura = cursor.fetchone()
+        print("Passou: query_fatura, ",file=sys.stderr)
+        print(fatura,"\n",file=sys.stderr)
+        if fatura[4] == 2:
+
+            entregador, resp_status = seleciona_entregador()
+            print(entregador,file=sys.stderr)
+            
+            query = "UPDATE pedido SET id_entregador = %s, status_pedido = 2 WHERE id_pedido = %s"
+            values = (entregador['id_entregador'], id)
+            cursor.execute(query, values)
+            conn.commit()
+            return jsonify({"message": "Pedido atualizado com sucesso"}), 200
+        else:
+         return jsonify({"message": "Erro ao atualizar pedido (Fatura não paga)"}), 500
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+    finally:
+        cursor.close()
+        conn.close()
+
+
+
+
+
+# Rota para atualizar um pedido pelo ID
+@pedido_bp.route('/pedido/atualiza_pedido_a_caminho/<int:id>', methods=['PUT'])
+def update_pedido_a_caminho(id):
+    db_objt = db_mysql_class()
+    conn = db_objt.get_db_connection()
+    cursor = conn.cursor()
+    try:
+        query = "UPDATE pedido SET status_pedido = 3 WHERE id_pedido = %s"
+        values = (id,)
+        cursor.execute(query, values)
+        conn.commit()
+        return jsonify({"message": "Pedido atualizado com sucesso"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+    finally:
+        cursor.close()
+        conn.close()
+
+
+
+
+
+
+
+
+# Rota para atualizar um pedido pelo ID
+@pedido_bp.route('/pedido/atualiza_pedido_pago_entregue/<int:id>', methods=['PUT'])
+def update_pedido_entregue(id):
+    db_objt = db_mysql_class()
+    conn = db_objt.get_db_connection()
+    cursor = conn.cursor()
+    try:
+
+
+        query_pedido = "SELECT * FROM pedido WHERE id_pedido =  %s "
+        values_pedido =(id,)
+        cursor.execute(query_pedido, values_pedido)
+        pedido = cursor.fetchone()
+        print("Passou: Pedido, query do pedido",file=sys.stderr)
+        print(pedido,"\n",file=sys.stderr)
+
+        entregador, resp_status = update_entregador_disponivel(pedido[3])
+        print(entregador,file=sys.stderr)
+        
+        query = "UPDATE pedido SET status_pedido = 4 WHERE id_pedido = %s"
+        values = (id,)
+        cursor.execute(query, values)
+        conn.commit()
+        return jsonify({"message": "Pedido atualizado com sucesso"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+    finally:
+        cursor.close()
+        conn.close()
+
+
+
+

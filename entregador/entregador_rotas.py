@@ -215,7 +215,7 @@ def seleciona_entregador():
         entregador = cursor.fetchone()
         if entregador:
             entregador_json = dict(entregador)
-            print(entregador_json,file=sys.stderr)
+            # print(entregador_json,file=sys.stderr)
             update_entregador_indisponivel(entregador_json['id_entregador'])
             return entregador_json, 200
         else:

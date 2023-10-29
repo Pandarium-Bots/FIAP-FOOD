@@ -214,22 +214,30 @@ def get_produto_restaurante(id_restaurante):
 # Rota para recuperar o produto
 # @produto_bp.route('/produto/produto_lote/', methods=['GET'])
 def get_produto_lote(produtos_lista):
+    print("Passou : Get_prduto",file=sys.stderr)
+
     db_objt = db_mysql_class()
     conn = db_objt.get_db_connection()
     cursor = conn.cursor(dictionary=True)
 
     try:
+        print("Passou : COMEÇO",file=sys.stderr)
+
         produtos_string = ','.join(map(str,produtos_lista))
+        print("Passou : produtos_string",file=sys.stderr)
+
 
         query = f"SELECT * FROM produto WHERE id_produto in ({produtos_string})"
         cursor.execute(query)
         produto = cursor.fetchall()
         if produto:
-            return jsonify(produto), 200
+            return produto
         else:
-            return jsonify({"message": "produto não encontrado"}), 404
+            print("prdutos não encontrados")
+            return [] 
     except Exception as e:
-        return jsonify({"error": str(e)}), 400
+        print(e)
+        return [] 
     finally:
         cursor.close()
         conn.close()
