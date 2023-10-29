@@ -146,6 +146,40 @@ def get_pedido(id):
 
 
 
+
+
+# Rota para recuperar o pedido
+@pedido_bp.route('/pedido/consulta_pedido_status/<int:id>', methods=['GET'])
+def get_pedido_status(id):
+    db_objt = db_mysql_class()
+    conn = db_objt.get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    try:
+        query = "SELECT pd.*, sp.status_pedido as status_pedido FROM `FIAP-FOOD`.pedido as pd JOIN `FIAP-FOOD`.pedido_status as sp ON pd.status_pedido = sp.id_pedido_status WHERE pd.status_pedido = %s"
+        cursor.execute(query, (id,))
+        pedido = cursor.fetchall()
+        if pedido:
+            return jsonify(pedido), 200
+        else:
+            return jsonify({"message": "pedido não encontrado"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+    finally:
+        cursor.close()
+        conn.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Rota para atualizar um pedido pelo ID
 @pedido_bp.route('/pedido/atualiza_pedido/<int:id>', methods=['PUT'])
 def update_pedido(id):
