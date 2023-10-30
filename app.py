@@ -14,7 +14,7 @@ from flask_restx import Api, Resource
 
 #Criar uma instância do Flask
 app = Flask(__name__)
-api = Api(app, version='1.0', title='Minha API', description='Uma API de exemplo', doc='/swagger/')
+api = Api(app, version='1.0', title='FIAP-FOOD', description='API sobre o entregavel da pós', doc='/swagger/')
 
 
 app.register_blueprint(cliente_bp)
