@@ -1,6 +1,8 @@
 from flask import Blueprint, jsonify,request
 import sys
 from db import db_mysql_class
+from flasgger import swag_from
+
 
 cliente_bp = Blueprint('cliente', __name__)
 
@@ -8,6 +10,7 @@ cliente_bp = Blueprint('cliente', __name__)
 
 
 @cliente_bp.route('/cliente/cria_cliente', methods=['POST'])
+@swag_from('../swagger_yaml/create_cliente.yaml')
 def create_cliente():
     db_objt = db_mysql_class()
     conn = db_objt.get_db_connection()
@@ -29,6 +32,7 @@ def create_cliente():
 
 # Rota para consultar um cliente pelo ID
 @cliente_bp.route('/cliente/consulta_cliente/<int:id>', methods=['GET'])
+@swag_from('../swagger_yaml/get_cliente.yaml')
 def get_cliente(id):
     db_objt = db_mysql_class()
     conn = db_objt.get_db_connection()
@@ -54,6 +58,7 @@ def get_cliente(id):
 
 # Rota para atualizar um cliente pelo ID
 @cliente_bp.route('/cliente/atualiza_cliente/<int:id>', methods=['PUT'])
+@swag_from('../swagger_yaml/update_cliente.yaml')
 def update_cliente(id):
     db_objt = db_mysql_class()
     conn = db_objt.get_db_connection()
@@ -76,6 +81,7 @@ def update_cliente(id):
 
 # Rota para excluir um cliente pelo ID
 @cliente_bp.route('/cliente/deleta_cliente/<int:id>', methods=['DELETE'])
+@swag_from('../swagger_yaml/delete_cliente.yaml')
 def delete_cliente(id):
     db_objt = db_mysql_class()
     conn = db_objt.get_db_connection()
@@ -102,6 +108,7 @@ def delete_cliente(id):
 
 # Rota de cria endereco_cliente 
 @cliente_bp.route('/cliente/cria_endereco_cliente', methods=['POST'])
+@swag_from('../swagger_yaml/criar_endereco_cliente.yaml')
 def criar_endereco_cliente():
     
     db_objt = db_mysql_class()
@@ -137,6 +144,7 @@ def criar_endereco_cliente():
 
 # Rota para consultar todos os endereco_cliente pelo ID do cliente
 @cliente_bp.route('/cliente/consulta_endereco_cliente/<int:id>', methods=['GET'])
+@swag_from('../swagger_yaml/obter_endereco_cliente.yaml')
 def obter_endereco_cliente(id):
 
     db_objt = db_mysql_class()
@@ -163,6 +171,7 @@ def obter_endereco_cliente(id):
 
 # Rota para atualizar um cliente pelo ID
 @cliente_bp.route('/cliente/atualiza_endereco_cliente/<int:id>', methods=['PUT'])
+@swag_from('../swagger_yaml/atualizar_endereco_cliente.yaml')
 def atualizar_endereco_cliente(id):
 
     db_objt = db_mysql_class()
@@ -199,6 +208,7 @@ def atualizar_endereco_cliente(id):
 
 # Rota para excluir um cliente pelo ID
 @cliente_bp.route('/cliente/deleta_endereco_cliente/<int:id>', methods=['DELETE'])
+@swag_from('../swagger_yaml/excluir_endereco_cliente.yaml')
 def excluir_endereco_cliente(id):
 
     db_objt = db_mysql_class()
@@ -224,6 +234,7 @@ def excluir_endereco_cliente(id):
 
 # Rota para consultar um cliente pelo CPF
 @cliente_bp.route('/cliente/consulta_cliente_cpf/<string:cpf>', methods=['GET'])
+@swag_from('../swagger_yaml/get_cliente_cpf.yaml')
 def get_cliente_cpf(cpf):
     db_objt = db_mysql_class()
     conn = db_objt.get_db_connection()

@@ -10,10 +10,12 @@ from pedido import pedido_bp
 from produto import produto_bp
 from fatura import fatura_bp
 from flask_restx import Api, Resource
+from flasgger import Swagger
 
 
 #Criar uma instância do Flask
 app = Flask(__name__)
+swagger = Swagger(app)
 api = Api(app, version='1.0', title='FIAP-FOOD', description='API sobre o entregavel da pós', doc='/swagger/')
 
 

@@ -2,6 +2,8 @@ from flask import Blueprint, jsonify,request
 import sys
 from db import db_mysql_class
 from datetime import datetime
+from flasgger import swag_from
+
 
 fatura_bp = Blueprint('fatura', __name__)
 
@@ -17,6 +19,7 @@ def check(list):
 
 # Rota para criar uma nova fatura
 @fatura_bp.route('/fatura/cria_fatura', methods=['POST'])
+@swag_from('../swagger_yaml/create_fatura.yaml')
 def create_fatura():
     db_objt = db_mysql_class()
     conn = db_objt.get_db_connection()
@@ -41,6 +44,7 @@ def create_fatura():
 
 # Rota para recuperar a fatura
 @fatura_bp.route('/fatura/consulta_fatura/<int:id>', methods=['GET'])
+@swag_from('../swagger_yaml/get_fatura.yaml')
 def get_fatura(id):
     db_objt = db_mysql_class()
     conn = db_objt.get_db_connection()
@@ -66,6 +70,7 @@ def get_fatura(id):
 
 # Rota para atualizar um fatura pelo ID
 @fatura_bp.route('/fatura/atualiza_fatura/<int:id>', methods=['PUT'])
+@swag_from('../swagger_yaml/update_fatura_status.yaml')
 def update_fatura_status(id):
     db_objt = db_mysql_class()
     conn = db_objt.get_db_connection()
@@ -85,6 +90,7 @@ def update_fatura_status(id):
 
 
 @fatura_bp.route('/fatura/atualiza_fatura_pago/<int:id>', methods=['PUT'])
+@swag_from('../swagger_yaml/update_fatura_status_pago.yaml')
 def update_fatura_status_pago(id):
     db_objt = db_mysql_class()
     conn = db_objt.get_db_connection()
@@ -106,6 +112,7 @@ def update_fatura_status_pago(id):
 
 
 @fatura_bp.route('/fatura/atualiza_fatura_nao_pago/<int:id>', methods=['PUT'])
+@swag_from('../swagger_yaml/update_fatura_status_nao_pago.yaml')
 def update_fatura_status_nao_pago(id):
     db_objt = db_mysql_class()
     conn = db_objt.get_db_connection()
@@ -126,6 +133,7 @@ def update_fatura_status_nao_pago(id):
 
 
 @fatura_bp.route('/fatura/atualiza_fatura_cancelado/<int:id>', methods=['PUT'])
+@swag_from('../swagger_yaml/update_fatura_status_cancelado.yaml')
 def update_fatura_status_cancelado(id):
     db_objt = db_mysql_class()
     conn = db_objt.get_db_connection()
@@ -175,9 +183,10 @@ def update_fatura_status_cancelado(id):
 
 
 
-# Rota para recuperar todos os produtos
+# Rota para recuperar todx consulta_all_fatura
 @fatura_bp.route('/fatura/consulta_all/', methods=['GET'])
-def get_entregador_all():
+@swag_from('../swagger_yaml/get_entregador_all.yaml')
+def consulta_all_fatura():
     db_objt = db_mysql_class()
     conn = db_objt.get_db_connection()
     cursor = conn.cursor(dictionary=True)
