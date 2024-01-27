@@ -58,7 +58,7 @@ Instância de Banco de dados MySQL criado e hospedado no DigitalOcean também.
 - **Sobre os tópicos**: Abaixo segue a explicação de cada chamada e exemplo de utilização da chamada.
 
 
-<details><summary>Explicação Apis</summary>
+<details><summary>Explicação APIs</summary>
 
 ## Gerenciando Restaurantes
 1. **Registrar um Entregador**:
@@ -526,7 +526,7 @@ Instância de Banco de dados MySQL criado e hospedado no DigitalOcean também.
 - Se tiver dúvidas ou problemas, entre em contato com nosso suporte técnico através do Aluno **Leonilson Sousa de Alencar Filho**.
 
 
-
+<!-- 
 
 ordem todo:
 
@@ -539,4 +539,4 @@ ordem todo:
     - descrição
     - exemplo de chamada
 - ordem de execução do fluxo 
-    - criação de usuário ---- pedido entregue
+    - criação de usuário ---- pedido entregue -->
