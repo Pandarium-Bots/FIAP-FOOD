@@ -523,5 +523,6 @@ Instância de Banco de dados MySQL criado e hospedado no DigitalOcean também.
 - **Eficiência nas Requisições**: Evite requisições desnecessárias para não sobrecarregar o sistema.
 
 ## **Passo 6: Suporte e Ajuda**
-- Se tiver dúvidas ou problemas, entre em contato com nosso suporte técnico através do Aluno **Leonilson Sousa de Alencar Filho**.
+- Se tiver dúvidas ou problemas, consulte nossa seção de FAQs ou entre em contato com nosso suporte técnico através do [suporte@apiempresa.com].
+
 
