@@ -41,12 +41,18 @@ Instância de Banco de dados MySQL criado e hospedado no DigitalOcean também.
 - **Descrição Geral**: Esta API permite gerenciar pedidos, clientes, produtos e entregadores em um sistema de restaurante. Com ela, você pode criar, atualizar, excluir e consultar informações detalhadas.
 
 ## **Passo 2: Configuração Inicial**
-- **Obtenção de Credenciais**: Para usar a API, utilize suas credenciais (API Key) que foram previamente fornecida.
+- **Obtenção de Credenciais**: Para usar a API, utilize suas credenciais (API Key) que foram previamente fornecida no arquivo entregue no Tech Challenge.
 - **Configuração do Ambiente**: Instale as ferramentas necessárias, como Postman ou cURL, para fazer requisições à API.
 
 ## **Passo 3: Autenticação**
 - **Utilizando a API Key**: Em todas as suas requisições, inclua a API Key no cabeçalho para autenticação.
 
+   ```json
+   
+    {
+        "Authorization": "bearer TOKEN_FORNECIDO"
+    }
+   ```
 
 ## **Passo 4: Entendimento das APIs**
 - **Sobre os tópicos**: Abaixo segue a explicação de cada chamada e exemplo de utilização da chamada.
@@ -512,12 +518,12 @@ Instância de Banco de dados MySQL criado e hospedado no DigitalOcean também.
 
 
 
-## **Passo 7: Práticas Recomendadas**
+## **Passo 5: Práticas Recomendadas**
 - **Segurança**: Mantenha sua API Key segura e não a compartilhe.
 - **Eficiência nas Requisições**: Evite requisições desnecessárias para não sobrecarregar o sistema.
 
-## **Passo 8: Suporte e Ajuda**
-- Se tiver dúvidas ou problemas, consulte nossa seção de FAQs ou entre em contato com nosso suporte técnico através do [suporte@apiempresa.com].
+## **Passo 6: Suporte e Ajuda**
+- Se tiver dúvidas ou problemas, entre em contato com nosso suporte técnico através do Aluno **Leonilson Sousa de Alencar Filho**.
 
 
 
