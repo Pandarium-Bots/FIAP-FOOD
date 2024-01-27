@@ -525,18 +525,3 @@ Instância de Banco de dados MySQL criado e hospedado no DigitalOcean também.
 ## **Passo 6: Suporte e Ajuda**
 - Se tiver dúvidas ou problemas, entre em contato com nosso suporte técnico através do Aluno **Leonilson Sousa de Alencar Filho**.
 
-
-<!-- 
-
-ordem todo:
-
-- passo a passo para execução do projeto
-    - fazendo deploy da aplicação
-
-
-    
-- descrição das apis
-    - descrição
-    - exemplo de chamada
-- ordem de execução do fluxo 
-    - criação de usuário ---- pedido entregue -->
