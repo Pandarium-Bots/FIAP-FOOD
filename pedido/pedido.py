@@ -105,7 +105,7 @@ def create_pedido():
             conn.commit()
 
 
-            return jsonify({"message": "pedido criado com sucesso"}), 201
+            return jsonify({"message": "pedido criado com sucesso","id pedido":pedido[0]}), 201
         else:
            return jsonify({"message": "Pedido invalido, produtos de mais de um restaurante no pedido"}), 400
         
@@ -171,12 +171,6 @@ def get_pedido_status(id):
     finally:
         cursor.close()
         conn.close()
-
-
-
-
-
-
 
 
 
@@ -349,4 +343,26 @@ def update_pedido_entregue(id):
 
 
 
+
+
+# Rota para recuperar o pedido
+@pedido_bp.route('/pedido/consulta_all_pedido_status/', methods=['GET'])
+@swag_from('../swagger_yaml/get_all_pedido_status.yaml')
+def get_all_pedido_status():
+    db_objt = db_mysql_class()
+    conn = db_objt.get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    try:
+        query = "SELECT * FROM pedido as pd where pd.status_pedido <> 5 ORDER BY CASE pd.status_pedido WHEN 4 THEN 1 WHEN 3 THEN 2 WHEN 2 THEN 3 WHEN 1  THEN 4 END, pd.data_hora_pedido ASC;"
+        cursor.execute(query)
+        pedido = cursor.fetchall()
+        if pedido:
+            return jsonify(pedido), 200
+        else:
+            return jsonify({"message": "pedido não encontrado"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+    finally:
+        cursor.close()
+        conn.close()
 
