@@ -41,7 +41,7 @@ Instância de Banco de dados MySQL criado e hospedado no DigitalOcean também.
 - **Descrição Geral**: Esta API permite gerenciar pedidos, clientes, produtos e entregadores em um sistema de restaurante. Com ela, você pode criar, atualizar, excluir e consultar informações detalhadas.
 
 ## **Passo 2: Configuração Inicial**
-- **Obtenção de Credenciais**: Para usar a API, primeiro obtenha suas credenciais (API Key) através do nosso portal de usuário.
+- **Obtenção de Credenciais**: Para usar a API, utilize suas credenciais (API Key) que foram previamente fornecida.
 - **Configuração do Ambiente**: Instale as ferramentas necessárias, como Postman ou cURL, para fazer requisições à API.
 
 ## **Passo 3: Autenticação**
@@ -54,7 +54,7 @@ Instância de Banco de dados MySQL criado e hospedado no DigitalOcean também.
 
 <details><summary>Explicação Apis</summary>
 
-## Gerenciando Restaurantes 
+## Gerenciando Restaurantes
 1. **Registrar um Entregador**:
    - Endpoint: `/create_restaurante`, Método: POST.
    - Inclua as informações do entregador.
@@ -503,6 +503,13 @@ Instância de Banco de dados MySQL criado e hospedado no DigitalOcean também.
    - Deleta uma avaliação com base no id informado
    
 </details>
+
+
+
+
+
+
+
 
 
 ## **Passo 7: Práticas Recomendadas**
