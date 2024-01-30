@@ -1,0 +1,139 @@
+kind: ReplicaSet
+apiVersion: apps/v1
+metadata:
+  name: fiap-food-587c9bc9bc
+  namespace: fiap-food
+  uid: 497ea3c0-4b47-4cf2-8483-23b5ed93937b
+  resourceVersion: '20456'
+  generation: 6
+  creationTimestamp: '2024-01-29T23:28:45Z'
+  labels:
+    k8s-app: fiap-food
+    pod-template-hash: 587c9bc9bc
+  annotations:
+    deployment.kubernetes.io/desired-replicas: '3'
+    deployment.kubernetes.io/max-replicas: '4'
+    deployment.kubernetes.io/revision: '3'
+  ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: fiap-food
+      uid: f5440db0-97d6-413e-a600-84fa1bea6b70
+      controller: true
+      blockOwnerDeletion: true
+  managedFields:
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: apps/v1
+      time: '2024-01-29T23:41:48Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:deployment.kubernetes.io/desired-replicas: {}
+            f:deployment.kubernetes.io/max-replicas: {}
+            f:deployment.kubernetes.io/revision: {}
+          f:labels:
+            .: {}
+            f:k8s-app: {}
+            f:pod-template-hash: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"f5440db0-97d6-413e-a600-84fa1bea6b70"}: {}
+        f:spec:
+          f:replicas: {}
+          f:selector: {}
+          f:template:
+            f:metadata:
+              f:labels:
+                .: {}
+                f:k8s-app: {}
+                f:pod-template-hash: {}
+              f:name: {}
+            f:spec:
+              f:containers:
+                k:{"name":"fiap-food"}:
+                  .: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"MYSQL_HOST"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"MYSQL_PASSWORD"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"MYSQL_USER"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:resources: {}
+                  f:securityContext:
+                    .: {}
+                    f:privileged: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+              f:dnsPolicy: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:terminationGracePeriodSeconds: {}
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: apps/v1
+      time: '2024-01-29T23:41:51Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:availableReplicas: {}
+          f:fullyLabeledReplicas: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+      subresource: status
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      k8s-app: fiap-food
+      pod-template-hash: 587c9bc9bc
+  template:
+    metadata:
+      name: fiap-food
+      creationTimestamp: null
+      labels:
+        k8s-app: fiap-food
+        pod-template-hash: 587c9bc9bc
+    spec:
+      containers:
+        - name: fiap-food
+          image: pirate006/fiap-food:latest
+          env:
+            - name: MYSQL_HOST
+              value: leo-pessoal-do-user-9421695-0.b.db.ondigitalocean.com
+            - name: MYSQL_PASSWORD
+              value: AVNS_ap_g-5JOgfWvQdn4cIQ
+            - name: MYSQL_USER
+              value: doadmin
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+          securityContext:
+            privileged: false
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+status:
+  replicas: 3
+  fullyLabeledReplicas: 3
+  readyReplicas: 3
+  availableReplicas: 3
+  observedGeneration: 6

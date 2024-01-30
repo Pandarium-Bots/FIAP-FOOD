@@ -1,0 +1,88 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: fiap-food
+  namespace: fiap-food
+  uid: b3f474f4-5785-42de-864d-62b496516e5e
+  resourceVersion: '13755'
+  creationTimestamp: '2024-01-29T23:06:29Z'
+  labels:
+    k8s-app: fiap-food
+  annotations:
+    kubernetes.digitalocean.com/load-balancer-id: dee68a43-dec6-4bc9-b84a-7cce1cd2bc59
+  finalizers:
+    - service.kubernetes.io/load-balancer-cleanup
+  managedFields:
+    - manager: k8saasapi
+      operation: Update
+      apiVersion: v1
+      time: '2024-01-29T23:06:29Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:k8s-app: {}
+        f:spec:
+          f:allocateLoadBalancerNodePorts: {}
+          f:externalTrafficPolicy: {}
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":5000,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+    - manager: digitalocean-cloud-controller-manager
+      operation: Update
+      apiVersion: v1
+      time: '2024-01-29T23:06:30Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubernetes.digitalocean.com/load-balancer-id: {}
+    - manager: digitalocean-cloud-controller-manager
+      operation: Update
+      apiVersion: v1
+      time: '2024-01-29T23:08:56Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:finalizers:
+            .: {}
+            v:"service.kubernetes.io/load-balancer-cleanup": {}
+        f:status:
+          f:loadBalancer:
+            f:ingress: {}
+      subresource: status
+spec:
+  ports:
+    - name: tcp-5000-5000-qvlwx
+      protocol: TCP
+      port: 5000
+      targetPort: 5000
+      nodePort: 30360
+  selector:
+    k8s-app: fiap-food
+  clusterIP: 10.245.129.145
+  clusterIPs:
+    - 10.245.129.145
+  type: LoadBalancer
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  allocateLoadBalancerNodePorts: true
+  internalTrafficPolicy: Cluster
+status:
+  loadBalancer:
+    ingress:
+      - ip: 104.248.108.45

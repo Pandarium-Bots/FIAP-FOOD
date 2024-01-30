@@ -1,0 +1,174 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: fiap-food
+  namespace: fiap-food
+  uid: f5440db0-97d6-413e-a600-84fa1bea6b70
+  resourceVersion: '20457'
+  generation: 4
+  creationTimestamp: '2024-01-29T23:06:29Z'
+  labels:
+    k8s-app: fiap-food
+  annotations:
+    deployment.kubernetes.io/revision: '3'
+  managedFields:
+    - manager: Go-http-client
+      operation: Update
+      apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:replicas: {}
+      subresource: scale
+    - manager: k8saasapi
+      operation: Update
+      apiVersion: apps/v1
+      time: '2024-01-29T23:28:45Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:k8s-app: {}
+        f:spec:
+          f:progressDeadlineSeconds: {}
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:strategy:
+            f:rollingUpdate:
+              .: {}
+              f:maxSurge: {}
+              f:maxUnavailable: {}
+            f:type: {}
+          f:template:
+            f:metadata:
+              f:labels:
+                .: {}
+                f:k8s-app: {}
+              f:name: {}
+            f:spec:
+              f:containers:
+                k:{"name":"fiap-food"}:
+                  .: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"MYSQL_HOST"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"MYSQL_PASSWORD"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"MYSQL_USER"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:resources: {}
+                  f:securityContext:
+                    .: {}
+                    f:privileged: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+              f:dnsPolicy: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:terminationGracePeriodSeconds: {}
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: apps/v1
+      time: '2024-01-29T23:41:51Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:availableReplicas: {}
+          f:conditions:
+            .: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updatedReplicas: {}
+      subresource: status
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      k8s-app: fiap-food
+  template:
+    metadata:
+      name: fiap-food
+      creationTimestamp: null
+      labels:
+        k8s-app: fiap-food
+    spec:
+      containers:
+        - name: fiap-food
+          image: pirate006/fiap-food:latest
+          env:
+            - name: MYSQL_HOST
+              value: leo-pessoal-do-user-9421695-0.b.db.ondigitalocean.com
+            - name: MYSQL_PASSWORD
+              value: AVNS_ap_g-5JOgfWvQdn4cIQ
+            - name: MYSQL_USER
+              value: doadmin
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+          securityContext:
+            privileged: false
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+status:
+  observedGeneration: 4
+  replicas: 3
+  updatedReplicas: 3
+  readyReplicas: 3
+  availableReplicas: 3
+  conditions:
+    - type: Progressing
+      status: 'True'
+      lastUpdateTime: '2024-01-29T23:28:46Z'
+      lastTransitionTime: '2024-01-29T23:06:29Z'
+      reason: NewReplicaSetAvailable
+      message: ReplicaSet "fiap-food-587c9bc9bc" has successfully progressed.
+    - type: Available
+      status: 'True'
+      lastUpdateTime: '2024-01-29T23:41:51Z'
+      lastTransitionTime: '2024-01-29T23:41:51Z'
+      reason: MinimumReplicasAvailable
+      message: Deployment has minimum availability.
