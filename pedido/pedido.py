@@ -318,8 +318,6 @@ def update_pedido_entregue(id):
     conn = db_objt.get_db_connection()
     cursor = conn.cursor()
     try:
-
-
         query_pedido = "SELECT * FROM pedido WHERE id_pedido =  %s "
         values_pedido =(id,)
         cursor.execute(query_pedido, values_pedido)
@@ -365,4 +363,28 @@ def get_all_pedido_status():
     finally:
         cursor.close()
         conn.close()
+
+
+
+
+
+# Rota para atualizar um pedido pelo ID
+@pedido_bp.route('/pedido/atualiza_pedido_cancelado/<int:id>', methods=['PUT'])
+@swag_from('../swagger_yaml/update_pedido_cancelado.yaml')
+def update_pedido_cancelado(id):
+    db_objt = db_mysql_class()
+    conn = db_objt.get_db_connection()
+    cursor = conn.cursor()
+    try:
+        query = "UPDATE pedido SET status_pedido = 6 WHERE id_pedido = %s"
+        values = (id,)
+        cursor.execute(query, values)
+        conn.commit()
+        return jsonify({"message": "Pedido atualizado com sucesso"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+    finally:
+        cursor.close()
+        conn.close()
+
 
