@@ -18,7 +18,7 @@ from db import db_mysql_class
 
 
 def token_required(f):
-
+    
     token = None
 
     if 'Authorization' in request.headers:
@@ -53,6 +53,8 @@ api = Api(app, version='1.0', title='FIAP-FOOD', description='API sobre o entreg
 
 @app.before_request
 def before_request():
+    if request.path == '/apidocs/#/':
+        return
     token_func = token_required(lambda: None)
     return token_func
 

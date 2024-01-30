@@ -130,11 +130,11 @@ spec:
           image: pirate006/fiap-food:latest
           env:
             - name: MYSQL_HOST
-              value: leo-pessoal-do-user-9421695-0.b.db.ondigitalocean.com
+              value: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
             - name: MYSQL_PASSWORD
-              value: AVNS_ap_g-5JOgfWvQdn4cIQ
+              value: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
             - name: MYSQL_USER
-              value: doadmin
+              value: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
           resources: {}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File

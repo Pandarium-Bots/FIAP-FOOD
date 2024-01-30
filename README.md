@@ -19,7 +19,9 @@ Swagger: https://fiap-food-app-7qsvg.ondigitalocean.app/apidocs/#/
 
 Insomnia: https://github.com/Pandarium-Bots/FIAP-FOOD/blob/main/Insomnia_2023-11-01.json
 
+Imagem Docker: https://hub.docker.com/r/pirate006/fiap-food
 
+Link do Vídeo: 
 
 Toda a aplicação está sendo executada no Digital Ocean, na URL:
  https://fiap-food-app-7qsvg.ondigitalocean.app/  
@@ -32,8 +34,313 @@ Deixamos a API aberta para a internet, e sem token de segurança por enquanto, p
 
 Instância de Banco de dados MySQL criado e hospedado no DigitalOcean também.
 
+# Arquitetura
+## **Desenho da Arquitetura**
+   <div align="center">
+   <img src="imagens\Desenho_Arquitetura_FIAPFOOD.png" height="400" alt="Arquitetura">
+   </div>
+
+## **Cluster Kubernetes**
+   <div align="center">
+   <img src="imagens\Cluter Kubernetes.png" height="400">
+   </div>
+
+## **Service Kubernetes Exposto**
+   <div align="center">
+   <img src="imagens\service.png" >
+   </div>
 
 
+
+  
+   
+<br>
+<br>
+<br>
+
+# Execução do Projeto
+## **Executando localmente**
+- **Faça o pull da imagem do DockerHub**: https://hub.docker.com/r/pirate006/fiap-food
+- **Configure as Variáveis de Ambiente para acesso ao Database**: Fornecido no Word entregue no Tech Challenge
+
+## **Executando em um Cluster Kubernetes**
+-  <details><summary>Crie o Recurso de Deployment no Kubernetes a partir do Seguinte yaml:</summary>
+   
+      ```yaml
+            kind: Deployment
+            apiVersion: apps/v1
+            metadata:
+            name: fiap-food
+            namespace: fiap-food
+            uid: f5440db0-97d6-413e-a600-84fa1bea6b70
+            resourceVersion: '20457'
+            generation: 4
+            creationTimestamp: '2024-01-29T23:06:29Z'
+            labels:
+               k8s-app: fiap-food
+            annotations:
+               deployment.kubernetes.io/revision: '3'
+            managedFields:
+               - manager: Go-http-client
+                  operation: Update
+                  apiVersion: apps/v1
+                  fieldsType: FieldsV1
+                  fieldsV1:
+                  f:spec:
+                     f:replicas: {}
+                  subresource: scale
+               - manager: k8saasapi
+                  operation: Update
+                  apiVersion: apps/v1
+                  time: '2024-01-29T23:28:45Z'
+                  fieldsType: FieldsV1
+                  fieldsV1:
+                  f:metadata:
+                     f:labels:
+                        .: {}
+                        f:k8s-app: {}
+                  f:spec:
+                     f:progressDeadlineSeconds: {}
+                     f:revisionHistoryLimit: {}
+                     f:selector: {}
+                     f:strategy:
+                        f:rollingUpdate:
+                        .: {}
+                        f:maxSurge: {}
+                        f:maxUnavailable: {}
+                        f:type: {}
+                     f:template:
+                        f:metadata:
+                        f:labels:
+                           .: {}
+                           f:k8s-app: {}
+                        f:name: {}
+                        f:spec:
+                        f:containers:
+                           k:{"name":"fiap-food"}:
+                              .: {}
+                              f:env:
+                              .: {}
+                              k:{"name":"MYSQL_HOST"}:
+                                 .: {}
+                                 f:name: {}
+                                 f:value: {}
+                              k:{"name":"MYSQL_PASSWORD"}:
+                                 .: {}
+                                 f:name: {}
+                                 f:value: {}
+                              k:{"name":"MYSQL_USER"}:
+                                 .: {}
+                                 f:name: {}
+                                 f:value: {}
+                              f:image: {}
+                              f:imagePullPolicy: {}
+                              f:name: {}
+                              f:resources: {}
+                              f:securityContext:
+                              .: {}
+                              f:privileged: {}
+                              f:terminationMessagePath: {}
+                              f:terminationMessagePolicy: {}
+                        f:dnsPolicy: {}
+                        f:restartPolicy: {}
+                        f:schedulerName: {}
+                        f:securityContext: {}
+                        f:terminationGracePeriodSeconds: {}
+               - manager: kube-controller-manager
+                  operation: Update
+                  apiVersion: apps/v1
+                  time: '2024-01-29T23:41:51Z'
+                  fieldsType: FieldsV1
+                  fieldsV1:
+                  f:metadata:
+                     f:annotations:
+                        .: {}
+                        f:deployment.kubernetes.io/revision: {}
+                  f:status:
+                     f:availableReplicas: {}
+                     f:conditions:
+                        .: {}
+                        k:{"type":"Available"}:
+                        .: {}
+                        f:lastTransitionTime: {}
+                        f:lastUpdateTime: {}
+                        f:message: {}
+                        f:reason: {}
+                        f:status: {}
+                        f:type: {}
+                        k:{"type":"Progressing"}:
+                        .: {}
+                        f:lastTransitionTime: {}
+                        f:lastUpdateTime: {}
+                        f:message: {}
+                        f:reason: {}
+                        f:status: {}
+                        f:type: {}
+                     f:observedGeneration: {}
+                     f:readyReplicas: {}
+                     f:replicas: {}
+                     f:updatedReplicas: {}
+                  subresource: status
+            spec:
+            replicas: 3
+            selector:
+               matchLabels:
+                  k8s-app: fiap-food
+            template:
+               metadata:
+                  name: fiap-food
+                  creationTimestamp: null
+                  labels:
+                  k8s-app: fiap-food
+               spec:
+                  containers:
+                  - name: fiap-food
+                     image: pirate006/fiap-food:latest
+                     env:
+                        - name: MYSQL_HOST
+                        value: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                        - name: MYSQL_PASSWORD
+                        value: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                        - name: MYSQL_USER
+                        value: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                     resources: {}
+                     terminationMessagePath: /dev/termination-log
+                     terminationMessagePolicy: File
+                     imagePullPolicy: Always
+                     securityContext:
+                        privileged: false
+                  restartPolicy: Always
+                  terminationGracePeriodSeconds: 30
+                  dnsPolicy: ClusterFirst
+                  securityContext: {}
+                  schedulerName: default-scheduler
+            strategy:
+               type: RollingUpdate
+               rollingUpdate:
+                  maxUnavailable: 25%
+                  maxSurge: 25%
+            revisionHistoryLimit: 10
+            progressDeadlineSeconds: 600
+            status:
+            observedGeneration: 4
+            replicas: 3
+            updatedReplicas: 3
+            readyReplicas: 3
+            availableReplicas: 3
+            conditions:
+               - type: Progressing
+                  status: 'True'
+                  lastUpdateTime: '2024-01-29T23:28:46Z'
+                  lastTransitionTime: '2024-01-29T23:06:29Z'
+                  reason: NewReplicaSetAvailable
+                  message: ReplicaSet "fiap-food-587c9bc9bc" has successfully progressed.
+               - type: Available
+                  status: 'True'
+                  lastUpdateTime: '2024-01-29T23:41:51Z'
+                  lastTransitionTime: '2024-01-29T23:41:51Z'
+                  reason: MinimumReplicasAvailable
+                  message: Deployment has minimum availability.
+
+      ```
+
+   </detail>
+
+-  <details><summary>Crie o Recurso de Service no Kubernetes a partir do Seguinte yaml:</summary>
+   
+      ```yaml
+         kind: Service
+         apiVersion: v1
+         metadata:
+         name: fiap-food
+         namespace: fiap-food
+         uid: b3f474f4-5785-42de-864d-62b496516e5e
+         resourceVersion: '13755'
+         creationTimestamp: '2024-01-29T23:06:29Z'
+         labels:
+            k8s-app: fiap-food
+         annotations:
+            kubernetes.digitalocean.com/load-balancer-id: dee68a43-dec6-4bc9-b84a-7cce1cd2bc59
+         finalizers:
+            - service.kubernetes.io/load-balancer-cleanup
+         managedFields:
+            - manager: k8saasapi
+               operation: Update
+               apiVersion: v1
+               time: '2024-01-29T23:06:29Z'
+               fieldsType: FieldsV1
+               fieldsV1:
+               f:metadata:
+                  f:labels:
+                     .: {}
+                     f:k8s-app: {}
+               f:spec:
+                  f:allocateLoadBalancerNodePorts: {}
+                  f:externalTrafficPolicy: {}
+                  f:internalTrafficPolicy: {}
+                  f:ports:
+                     .: {}
+                     k:{"port":5000,"protocol":"TCP"}:
+                     .: {}
+                     f:name: {}
+                     f:port: {}
+                     f:protocol: {}
+                     f:targetPort: {}
+                  f:selector: {}
+                  f:sessionAffinity: {}
+                  f:type: {}
+            - manager: digitalocean-cloud-controller-manager
+               operation: Update
+               apiVersion: v1
+               time: '2024-01-29T23:06:30Z'
+               fieldsType: FieldsV1
+               fieldsV1:
+               f:metadata:
+                  f:annotations:
+                     .: {}
+                     f:kubernetes.digitalocean.com/load-balancer-id: {}
+            - manager: digitalocean-cloud-controller-manager
+               operation: Update
+               apiVersion: v1
+               time: '2024-01-29T23:08:56Z'
+               fieldsType: FieldsV1
+               fieldsV1:
+               f:metadata:
+                  f:finalizers:
+                     .: {}
+                     v:"service.kubernetes.io/load-balancer-cleanup": {}
+               f:status:
+                  f:loadBalancer:
+                     f:ingress: {}
+               subresource: status
+         spec:
+         ports:
+            - name: tcp-5000-5000-qvlwx
+               protocol: TCP
+               port: 5000
+               targetPort: 5000
+               nodePort: 30360
+         selector:
+            k8s-app: fiap-food
+         clusterIP: 10.245.129.145
+         clusterIPs:
+            - 10.245.129.145
+         type: LoadBalancer
+         sessionAffinity: None
+         externalTrafficPolicy: Cluster
+         ipFamilies:
+            - IPv4
+         ipFamilyPolicy: SingleStack
+         allocateLoadBalancerNodePorts: true
+         internalTrafficPolicy: Cluster
+         status:
+         loadBalancer:
+            ingress:
+               - ip: 104.248.108.45
+
+      ```
+
+- **Fazer as alterações de IPs e ENVs nos YAMLs acima**
 
 # Guia de Utilização da API de Gerenciamento de Pedidos
 
@@ -510,19 +817,57 @@ Instância de Banco de dados MySQL criado e hospedado no DigitalOcean também.
    
 </details>
 
-
-
-
-
-
-
-
-
 ## **Passo 5: Práticas Recomendadas**
 - **Segurança**: Mantenha sua API Key segura e não a compartilhe.
 - **Eficiência nas Requisições**: Evite requisições desnecessárias para não sobrecarregar o sistema.
 
-## **Passo 6: Suporte e Ajuda**
-- Se tiver dúvidas ou problemas, consulte nossa seção de FAQs ou entre em contato com nosso suporte técnico através do [suporte@apiempresa.com].
+# Ordem de execução dos Endpoints
 
+## Fluxo Criar restaurante:
+
+1 - http://104.248.108.45:5000/restaurante/cria_restaurante/   **(Cadastra Restaurante)**
+
+2 - http://104.248.108.45:5000/produto/cria_produto/  **(Cadastra Produto no Restaurante)**
+
+
+## Fluxo Criar Cliente:
+1 - http://104.248.108.45:5000/cliente/cria_cliente/  **(Cadastra Cliente)**
+
+2 - http://104.248.108.45:5000/cliente/cria_endereco_cliente/  **(Cadastra Endereço do Cliente)**
+
+
+## Fluxo Cadastrar Entregador:
+
+1 - http://104.248.108.45:5000/entregador/cria_entregador/   **(Cadastra Entregador)**
+
+
+## Fluxo Realizar Pedido:
+
+1 - https://104.248.108.45:5000/restaurante/consulta_all/  **(Consulta todos os restaurantes)**
+
+2 - https://104.248.108.45:5000/produto/consulta_restaurante/%7Bid_restaurante%7D   **(Consulta todos os produtos de um restaurante)**
+
+3 - https://104.248.108.45:5000/pedido/cria_pedido   **(Cria um pedido com os produtos para o Restaurante - Gerando também uma fatura)**
+
+
+
+## Fluxo de pedido pago:
+
+1 - http://104.248.108.45:5000/fatura/atualiza_fatura_pago/%7Bid%7D  **(Atualiza Status da Fatura para Pago)**
+
+2 - http://104.248.108.45:5000/pedido/atualiza_pedido_preparacao/%7Bid%7D  **(Atualiza Status do pedido para 'em preparação')**
+
+3 - http://104.248.108.45:5000/pedido/atualiza_pedido_a_caminho/%7Bid%7D  **(Atualiza Status do pedido para 'a caminho')**
+
+4 - http://104.248.108.45:5000/pedido/atualiza_pedido_pago_entregue/%7Bid%7D  **(Atualiza Status do pedido para 'entregue')**
+
+
+
+## Fluxo de pedido não pago:
+
+1 - http://104.248.108.45:5000/fatura/atualiza_fatura_nao_pago/%7Bid%7D  **(Atualiza Status da Fatura para 'Não Pago')**
+
+2 - https://104.248.108.45:5000/fatura/atualiza_fatura_cancelado/%7Bid%7D  **(Atualiza Status da Fatura para 'Cancelado')**
+
+3 - http://104.248.108.45:5000/pedido/atualiza_pedido_cancelado/%7Bid%7D  **(Atualiza Status do pedido para 'Cancelado')**
 
