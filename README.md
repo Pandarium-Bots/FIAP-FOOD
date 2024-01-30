@@ -13,7 +13,7 @@ rm351640: William de Magalhães Pereira
 
 Repositório: https://github.com/Pandarium-Bots/FIAP-FOOD
 
-Miro: https://miro.com/app/board/uXjVMognDeM=/?share_link_id=774417067533
+Miro: https://miro.com/app/board/uXjVN080uAo=/?share_link_id=772933988991
 
 Swagger: https://fiap-food-app-7qsvg.ondigitalocean.app/apidocs/#/
 
