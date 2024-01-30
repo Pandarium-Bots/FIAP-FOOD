@@ -17,14 +17,11 @@ Miro: https://miro.com/app/board/uXjVMognDeM=/?share_link_id=774417067533
 
 Swagger: https://fiap-food-app-7qsvg.ondigitalocean.app/apidocs/#/
 
-Insomnia: https://github.com/Pandarium-Bots/FIAP-FOOD/blob/main/Insomnia_2023-11-01.json
+Insomnia: https://github.com/Pandarium-Bots/FIAP-FOOD/blob/main/Insomnia_2024-01-29.json
 
 Imagem Docker: https://hub.docker.com/r/pirate006/fiap-food
 
-Link do Vídeo: 
-
-Toda a aplicação está sendo executada no Digital Ocean, na URL:
- https://fiap-food-app-7qsvg.ondigitalocean.app/  
+Toda a aplicação está sendo executada no Digital Ocean, na URL: http://104.248.108.45:5000
 
 
 Deixamos a API aberta para a internet, e sem token de segurança por enquanto, para que possam utilizar as APIs e consultar nosso banco de dados.
